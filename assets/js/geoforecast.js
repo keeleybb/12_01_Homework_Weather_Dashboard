@@ -1,13 +1,9 @@
 var onLoadLat;
 var onLoadLon;
-console.log(window);
 // console.log(location.coords.latitude);
 
 navigator.geolocation.getCurrentPosition(function(location) {
-  console.log(location.coords.latitude);
   onLoadLat = location.coords.latitude;
-  console.log(onLoadLat);
-  console.log(location.coords.longitude);
   onLoadLon = location.coords.longitude;
   getCurrentWeatherLoad(onLoadLat, onLoadLon);
 });
@@ -29,10 +25,6 @@ function getCurrentWeatherLoad(lat, lon) {
     method: "GET"
   }).then(function(response) {
     console.log(response);
-    // Create CODE HERE to Log the queryURL
-    // console.log(queryURL);
-    // Create CODE HERE to log the resulting object
-    // console.log(response);
     $(".city-name").html(response.name + " (" + date + ") ");
     $(".weather-display").attr(
       "src",

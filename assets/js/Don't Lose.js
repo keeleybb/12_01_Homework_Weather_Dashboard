@@ -1,11 +1,12 @@
 // This is our API key. Add your own API key between the ""
 var APIKey = "dae7d6e81316318ac7b8037574e0fe1c";
 var date = moment().format("L");
-var city;
+var city = "denver,colorado";
 var cities = [];
 var localCities = JSON.parse(localStorage.getItem("cities")) || cities;
 
 function getCurrentWeather() {
+  var city = $(this).attr("data-name");
   getFiveDay(city);
 
   // Here we are building the URL we need to query the database
@@ -20,27 +21,23 @@ function getCurrentWeather() {
   $.ajax({
     url: queryURL,
     method: "GET"
-  })
-    .then(function(response) {
-      console.log(response);
+  }).then(function(response) {
+    console.log(response);
 
-      $(".city-name").html(response.name + " (" + date + ") ");
-      $(".weather-display").attr(
-        "src",
-        "http://openweathermap.org/img/wn/" +
-          response.weather[0].icon +
-          "@2x.png"
-      );
-      $(".wind").html("Wind Speed: " + response.wind.speed);
-      $(".humidity").text("Humidity: " + response.main.humidity);
-      $(".temp").text(
-        "Temp (f): " + ((response.main.temp - 273.15) * 1.8 + 32).toFixed(2)
-      );
-      var uvLat = response.coord.lat;
-      var uvLon = response.coord.lon;
-      uvIndex(uvLat, uvLon);
-    })
-    .catch(e => alert("Error: Please try another city"));
+    $(".city-name").html(response.name + " (" + date + ") ");
+    $(".weather-display").attr(
+      "src",
+      "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png"
+    );
+    $(".wind").html("Wind Speed: " + response.wind.speed);
+    $(".humidity").text("Humidity: " + response.main.humidity);
+    $(".temp").text(
+      "Temp (f): " + ((response.main.temp - 273.15) * 1.8 + 32).toFixed(2)
+    );
+    var uvLat = response.coord.lat;
+    var uvLon = response.coord.lon;
+    uvIndex(uvLat, uvLon);
+  });
 }
 
 function uvIndex(uvLat, uvLon) {
@@ -176,23 +173,18 @@ function renderButtons() {
 $("#add-city").on("click", function(event) {
   event.preventDefault();
   // This line of code will grab the input from the textbox
-  var cityInput = $("#city-input")
+  var city = $("#city-input")
     .val()
     .trim();
   // The movie from the textbox is then added to our array
-  localCities.push(cityInput);
+  localCities.push(city);
   //Need to add data to local storage
   localStorage.setItem("cities", JSON.stringify(localCities));
   // Calling renderButtons which handles the processing of our movie array
   renderButtons();
-  city = cityInput;
-  getCurrentWeather();
 });
 
-$(document).on("click", ".city", function() {
-  city = $(this).attr("data-name");
-  getCurrentWeather();
-});
+$(document).on("click", ".city", getCurrentWeather);
 // getFiveDay
 renderButtons();
 ///Make array and add searches to local storage for reuse

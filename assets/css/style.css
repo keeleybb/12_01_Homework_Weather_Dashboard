@@ -74,6 +74,9 @@ a:hover {
 .border-test {
   border: 2px solid #000;
 }
+.ht {
+  min-height: 150px;
+}
 .img-td {
   height: 50px !important;
 }
