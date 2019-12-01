@@ -22,8 +22,8 @@ function getCurrentWeather() {
     method: "GET"
   })
     .then(function(response) {
+      //Show Current Weather
       console.log(response);
-
       $(".city-name").html(response.name + " (" + date + ") ");
       $(".weather-display").attr(
         "src",
@@ -98,16 +98,19 @@ function getFiveDay(city) {
     // console.log(response.list);
     for (var i = 0; i < 40; i++) {
       var option = response.list[i].dt_txt.substring(11);
-      if ("12:00:00" == option) {
-        console.log("made it ", option, " ", response.list[i]);
+      var dateValue = response.list[i].dt_txt.substring(0, 10);
+      var currentDate = moment().format("YYYY-MM-DD");
+      console.log(dateValue);
+      console.log("current date ", currentDate);
+      if ("15:00:00" == option && dateValue != currentDate) {
+        console.log("Forecast ", option, " ", response.list[i]);
         // console.log(response.list[i].dt_txt.substring(0, 10));
         //Convert the date using moment js
+        console.log(response.list[i]);
         var dateString = response.list[i].dt_txt.substring(0, 10);
         var date = new moment(dateString);
         var formatDate = date.format("MM/DD/YYYY");
         console.log(formatDate);
-        //Push these to an array
-
         //Date
         dateArray.push(formatDate);
         console.log(dateArray);
@@ -179,14 +182,30 @@ $("#add-city").on("click", function(event) {
   var cityInput = $("#city-input")
     .val()
     .trim();
-  // The movie from the textbox is then added to our array
-  localCities.push(cityInput);
-  //Need to add data to local storage
-  localStorage.setItem("cities", JSON.stringify(localCities));
-  // Calling renderButtons which handles the processing of our movie array
-  renderButtons();
-  city = cityInput;
-  getCurrentWeather();
+
+  var queryURL =
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    cityInput +
+    "&appid=" +
+    APIKey;
+
+  // We then created an AJAX call
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  })
+    .then(function(response) {
+      // The movie from the textbox is then added to our array
+      localCities.push(cityInput);
+      //Need to add data to local storage
+      localStorage.setItem("cities", JSON.stringify(localCities));
+      // Calling renderButtons which handles the processing of our movie array
+
+      renderButtons();
+      city = cityInput;
+      getCurrentWeather();
+    })
+    .catch(e => alert("Error: Please try another city"));
 });
 
 $(document).on("click", ".city", function() {
