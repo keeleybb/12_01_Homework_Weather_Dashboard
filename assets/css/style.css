@@ -4,14 +4,27 @@ body {
     linear-gradient(315deg, #d8bfd8 25%, transparent 25%),
     linear-gradient(45deg, #d8bfd8 25%, transparent 25%);
   background-size: 20px 20px; */
-  background-color: #eee;
+  background-color: #fff;
+  font-size: 18px;
+  line-height: 1.75em;
+  color: #000;
 }
 
 .opaque-bg {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.15);
 }
 .black-bg {
   background-color: #52504e;
+}
+.white-bg {
+  background-color: #fff;
+}
+.light-grey-bg {
+  background-color: #d3d3d3;
+}
+.blue {
+  background-color: #50729f;
+  border-radius: 10px;
 }
 
 /* Text */
@@ -53,7 +66,7 @@ h4 {
 
 p {
   font-size: 14px;
-  line-height: 1em;
+  line-height: 1.5em;
   color: #000;
 }
 
@@ -63,27 +76,31 @@ a:hover {
 
 .big-btn {
   width: 100%;
-  border-top: 1px solid #000;
-  border-bottom: 1px solid #000;
+  border: 1px solid #000;
   text-align: left;
+  border-radius: 0px !important;
 }
 .btn-dark {
   color: #000;
   background-color: #0d98ba;
 }
 .border-test {
-  border: 2px solid #000;
+  border: 2px solid #808080;
+}
+.border-test-right {
+  border-right: 2px solid #000;
 }
 .ht {
   min-height: 150px;
 }
 .img-td {
-  height: 50px !important;
+  height: 60px !important;
 }
 
 .weather-display {
-  width: 50px;
+  width: 60px;
 }
+
 /* UV */
 .green-uv {
   border-radius: 10px;

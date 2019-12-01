@@ -31,9 +31,11 @@ function getCurrentWeatherLoad(lat, lon) {
       "http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png"
     );
     $(".wind").html("Wind Speed: " + response.wind.speed);
-    $(".humidity").text("Humidity: " + response.main.humidity);
-    $(".temp").text(
-      "Temp (f): " + ((response.main.temp - 273.15) * 1.8 + 32).toFixed(2)
+    $(".humidity").text("Humidity: " + response.main.humidity + "%");
+    $(".temp").html(
+      "Temperature: " +
+        ((response.main.temp - 273.15) * 1.8 + 32).toFixed(2) +
+        "&#176;F"
     );
     uvIndex(lat, lon);
     var city = response.name;
