@@ -37,6 +37,7 @@ function getCurrentWeather() {
       );
       var uvLat = response.coord.lat;
       var uvLon = response.coord.lon;
+      console.log("Are we getting this far?");
       uvIndex(uvLat, uvLon);
     })
     .catch(e => alert("Error: Please try another city"));
@@ -56,6 +57,7 @@ function uvIndex(uvLat, uvLon) {
     url: queryURLUV,
     method: "GET"
   }).then(function(response) {
+    console.log(response);
     var uvFinal = response.value;
     var btnUV = $("<span>").text(response.value);
     $(".uv-index").text("UV Index: ");
