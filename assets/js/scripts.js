@@ -28,13 +28,14 @@ function getCurrentWeather() {
           response.weather[0].icon +
           "@2x.png"
       );
-      $(".wind").html("Wind Speed: " + response.wind.speed);
-      $(".humidity").text("Humidity: " + response.main.humidity + "%");
       $(".temp").html(
         "Temperature: " +
           ((response.main.temp - 273.15) * 1.8 + 32).toFixed(2) +
           "&#176;F"
       );
+
+      $(".humidity").text("Humidity: " + response.main.humidity + "%");
+      $(".wind").html("Wind Speed: " + response.wind.speed + " MPH");
       var uvLat = response.coord.lat;
       var uvLon = response.coord.lon;
       console.log("Are we getting this far?");
