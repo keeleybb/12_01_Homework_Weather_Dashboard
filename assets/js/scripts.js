@@ -46,7 +46,7 @@ function getCurrentWeather() {
 function uvIndex(uvLat, uvLon) {
   //Try UV index
   var queryURLUV =
-    "http://api.openweathermap.org/data/2.5/uvi?appid=" +
+    "https://api.openweathermap.org/data/2.5/uvi?appid=" +
     APIKey +
     "&lat=" +
     uvLat +
