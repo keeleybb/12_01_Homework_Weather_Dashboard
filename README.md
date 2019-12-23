@@ -1,6 +1,8 @@
 # Weather Dashboard
 This weather dashboard was created for a web development bootcamp. If you enter a city, it will return the current weather, uv index and 5 day forecast. 
 
+See it in action: https://keeleybb.github.io/12_01_Homework_Weather_Dashboard/
+
 ## Future Improvements
 * Better Error handling
 * Improvements to template and look
